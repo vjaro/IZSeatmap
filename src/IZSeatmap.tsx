@@ -10,22 +10,31 @@ export class IZSeatmap extends Component<IZSeatmapContainerProps> {
     ref:any;
     blocks:any[];
     config:any;
+    key:any
 
     constructor(props:any){
         super(props);
-        this.state = {ref:null};
         this.ref = createRef();
         this.blocks = generateRandomBlocks();
         this.config = defaultConfig();
-
+        this.state = {
+            ref: null,
+            blocks: this.blocks,
+            config: this.config
+        };
     }
     componentDidMount(): void {
-        this.setState({ref: this.ref});
+        this.setState({ref: this.ref, blocks:this.blocks});
     }
 
     seatClick(seat:any){
         console.warn(seat);
         seat.item.selectedToggle();
+    }
+
+    reload(){
+        this.blocks = generateRandomBlocks();
+        this.setState({blocks: this.blocks});
     }
 
     render(): ReactNode {
@@ -34,12 +43,15 @@ export class IZSeatmap extends Component<IZSeatmapContainerProps> {
             
             <div>
                 <HelloWorldSample 
+                    key={this.key}
                     ref={this.ref} 
                     parentRef={this.ref} 
                     seatClick={this.seatClick}
                     config={this.config}
-                    blocks={this.blocks}
-            />
+                    blocks={this.blocks}/>
+                <div>
+                    <button onClick={this.reload.bind(this)}>Reload</button>
+                </div>
             </div>
         );
     }

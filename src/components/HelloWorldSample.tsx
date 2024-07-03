@@ -30,7 +30,7 @@ export class HelloWorldSample extends Component<HelloWorldSampleProps> {
         super(props);
         this.mountSeatmap = false;
         this.config = props.config;
-        this.blocks = [];
+        this.blocks = props.blocks;
         this.seatClick = props.seatClick;
         this.className = props.className;
         this.containerRef = createRef();
@@ -54,12 +54,11 @@ export class HelloWorldSample extends Component<HelloWorldSampleProps> {
         let self = this;
         setTimeout(
             function() {
-                // this.setState({ blocks: blocks});
                 self.replaceData(self.props.blocks);
             },
             500
         );
-    }
+    }  
 
 
     componentDidUpdate() {
@@ -72,19 +71,17 @@ export class HelloWorldSample extends Component<HelloWorldSampleProps> {
         if(!this.blocks){
             throw new Error('Blocks data not found')
         }
+
+
         if (!this.mountSeatmap) {
             this.mountSeatmap = true;
-            this.setState({
-                parentRef: this.props.parentRef,
-                mountSeatmap: true
-            });
-            
-        }else{
             this.seatMap = new SeatMapCanvas("#seatmap-container", this.config);
-            console.warn(this.seatMap);
             if(this.seatClick){
                 this.seatMap.eventManager.addEventListener("SEAT.CLICK", this.seatClick);
             }
+        
+        }else{
+            this.replaceData(this.props.blocks);
         }
         
     }
