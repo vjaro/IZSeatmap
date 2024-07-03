@@ -1,6 +1,19 @@
 /*
 Place your custom CSS here
 */
-.widget-hello-world {
-
-}
+#seatmap-container {
+    --s: 10px;  /* control the size of the grid */
+    --t: 0.5px;   /* the thickness */
+  
+    background:  
+      conic-gradient(from 90deg at var(--t) var(--t),#0000 25%,#55627029 0)
+       0 0/var(--s) var(--s);
+    /* you probably don't need to set any size in your case */
+    width: calc(round(down,100%,var(--s)) + var(--t));
+    height: calc(4*var(--s) + var(--t));
+  }
+  @supports not (opacity:round(1,1)) {
+    .grid-lines {
+      width: 100%;
+    }
+  }
