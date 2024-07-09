@@ -1,17 +1,18 @@
-import { Component, ReactNode, createElement,createRef, Fragment } from "react";
+import { PureComponent, ReactNode, createElement,createRef, Fragment } from "react";
 // import { createElement ,useState } from "react";
 import { HelloWorldSample } from "./components/HelloWorldSample";
-import {} from "mendix";
+import { } from "mendix";
 
 import { IZSeatmapContainerProps } from "../typings/IZSeatmapProps";
 
 import "./ui/IZSeatmap.css";
 
-export class IZSeatmap extends Component<IZSeatmapContainerProps> {
+export class IZSeatmap extends PureComponent<IZSeatmapContainerProps> {
     ref:any;
     blocks:any[];
     config:any;
     key:any
+    triggerComponentRender: boolean = true;
 
     constructor(props:any){
         super(props);
@@ -25,7 +26,12 @@ export class IZSeatmap extends Component<IZSeatmapContainerProps> {
     seatClick(seat:any){
         console.warn(seat);
         seat.item.selectedToggle();
+        this.triggerComponentRender = false
         this.props.buttonAction?.execute();
+    }
+
+    shouldComponentUpdate(): boolean {
+        return this.triggerComponentRender;
     }
 
     render(): ReactNode {
@@ -40,20 +46,8 @@ export class IZSeatmap extends Component<IZSeatmapContainerProps> {
                     config={this.config}
                     blocks={this.blocks}/>
             </Fragment>
-            
-            // <div>
-                
-            //     {/* <div>
-            //         <button onClick={this.reload.bind(this)}>Reload</button>
-            //     </div> */}
-            // </div>
         );
     }
-
-    
-    execute() {
-        console.warn("hello world");
-    };
 }
 
 
@@ -85,11 +79,34 @@ const defaultConfig= function(){
         }
     }
 }
-// export default function IZSeatmap(){
-//     const [ref, setRef] = useState();
-//     return <HelloWorldSample ref={setRef} parentRef={ref} />;
+// export default function IZSeatmap({buttonAction}){
+//     const ref = createRef();
+//     let config = defaultConfig();
+//     let blocks = generateRandomBlocks();
+
+//     const seatClick = useMemo((seat:any) => {
+//         console.warn(seat);
+//         buttonAction.execute();
+
+//     }, [buttonAction]);
+
+
+
+//     console.warn(buttonAction);
+//             return (
+//             <Fragment>
+//                 <HelloWorldSample
+//                     ref={ref} 
+//                     parentRef={ref} 
+//                     seatClick={seatClick}
+//                     config={config}
+//                     blocks={blocks}/>
+//             </Fragment>
+//         );
 
 // }
+
+
 
 const generateRandomBlocks = function () {
     let block_colors = ["#01a5ff", "#fccf4e", "#01a5ff", "#01a5ff"];
