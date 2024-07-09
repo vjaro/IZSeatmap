@@ -12,6 +12,18 @@
                 <caption>Default value</caption>
                 <description>Sample text input</description>
             </property>
+            <property key="data" type="datasource" isList="true" required="false">
+                <caption>Data source</caption>
+                <description />
+            </property>
+            <property key="cartItems" type="datasource" isList="true" required="false">
+                <caption>Cart items</caption>
+                <description />
+            </property>
+            <property key="buttonAction" type="action">
+                <caption>On click</caption>
+                <description>Action to be performed when button is clicked</description>
+            </property>
         </propertyGroup>
     </properties>
 </widget>

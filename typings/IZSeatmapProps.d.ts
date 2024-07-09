@@ -4,6 +4,7 @@
  * @author Mendix Widgets Framework Team
  */
 import { CSSProperties } from "react";
+import { ActionValue, ListValue } from "mendix";
 
 export interface IZSeatmapContainerProps {
     name: string;
@@ -11,6 +12,9 @@ export interface IZSeatmapContainerProps {
     style?: CSSProperties;
     tabIndex?: number;
     sampleText: string;
+    data?: ListValue;
+    cartItems?: ListValue;
+    buttonAction?: ActionValue;
 }
 
 export interface IZSeatmapPreviewProps {
@@ -23,4 +27,7 @@ export interface IZSeatmapPreviewProps {
     styleObject?: CSSProperties;
     readOnly: boolean;
     sampleText: string;
+    data: {} | { caption: string } | { type: string } | null;
+    cartItems: {} | { caption: string } | { type: string } | null;
+    buttonAction: {} | null;
 }

@@ -34,7 +34,6 @@ export class HelloWorldSample extends Component<HelloWorldSampleProps> {
         this.seatClick = props.seatClick;
         this.className = props.className;
         this.containerRef = createRef();
-        this.state = {parentRef: null, mountSeatmap: false, blocks:[]};
     }
 
     public getSelectedSeats(){
@@ -43,27 +42,16 @@ export class HelloWorldSample extends Component<HelloWorldSampleProps> {
 
     public replaceData(blocks:any){
         this.blocks = blocks;
-        this.seatMap.data.replaceData(this.blocks);
+        this.seatMap?.data?.replaceData(this.blocks);
     }
 
     public zoomToVenue(){
-        this.seatMap.zoomManager.zoomToVenue();
+        if(this.seatMap){
+            this.seatMap.zoomManager.zoomToVenue();
+        }
     }
 
     componentDidMount(): void {
-        let self = this;
-        setTimeout(
-            function() {
-                self.replaceData(self.props.blocks);
-            },
-            500
-        );
-    }  
-
-
-    componentDidUpdate() {
-        console.warn([this.props, "component did update"]);
-
         if(!this.props.parentRef){
             return;
         }
@@ -72,18 +60,25 @@ export class HelloWorldSample extends Component<HelloWorldSampleProps> {
             throw new Error('Blocks data not found')
         }
 
-
         if (!this.mountSeatmap) {
             this.mountSeatmap = true;
             this.seatMap = new SeatMapCanvas("#seatmap-container", this.config);
             if(this.seatClick){
                 this.seatMap.eventManager.addEventListener("SEAT.CLICK", this.seatClick);
             }
-        
-        }else{
-            this.replaceData(this.props.blocks);
         }
-        
+    }  
+
+    componentDidUpdate(){
+
+        let self = this;
+        setTimeout(
+            function() {
+                self.replaceData(self.props.blocks);
+                console.warn(self.props);
+            },
+            500
+        );
     }
 
     render() {

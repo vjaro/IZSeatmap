@@ -1,6 +1,7 @@
-import { Component, ReactNode, createElement,createRef } from "react";
+import { Component, ReactNode, createElement,createRef, Fragment } from "react";
 // import { createElement ,useState } from "react";
 import { HelloWorldSample } from "./components/HelloWorldSample";
+import {} from "mendix";
 
 import { IZSeatmapContainerProps } from "../typings/IZSeatmapProps";
 
@@ -17,44 +18,42 @@ export class IZSeatmap extends Component<IZSeatmapContainerProps> {
         this.ref = createRef();
         this.blocks = generateRandomBlocks();
         this.config = defaultConfig();
-        this.state = {
-            ref: null,
-            blocks: this.blocks,
-            config: this.config
-        };
-    }
-    componentDidMount(): void {
-        this.setState({ref: this.ref, blocks:this.blocks});
+
+        console.warn(this.props, "my props");
     }
 
     seatClick(seat:any){
         console.warn(seat);
         seat.item.selectedToggle();
-    }
-
-    reload(){
-        this.blocks = generateRandomBlocks();
-        this.setState({blocks: this.blocks});
+        this.props.buttonAction?.execute();
     }
 
     render(): ReactNode {
         console.warn(["IZSeatmap render"], this.ref);
         return (
-            
-            <div>
+            <Fragment>
                 <HelloWorldSample 
                     key={this.key}
                     ref={this.ref} 
                     parentRef={this.ref} 
-                    seatClick={this.seatClick}
+                    seatClick={this.seatClick.bind(this)}
                     config={this.config}
                     blocks={this.blocks}/>
-                <div>
-                    <button onClick={this.reload.bind(this)}>Reload</button>
-                </div>
-            </div>
+            </Fragment>
+            
+            // <div>
+                
+            //     {/* <div>
+            //         <button onClick={this.reload.bind(this)}>Reload</button>
+            //     </div> */}
+            // </div>
         );
     }
+
+    
+    execute() {
+        console.warn("hello world");
+    };
 }
 
 
@@ -154,6 +153,8 @@ const generateRandomBlocks = function () {
 
         blocks.push(block);
     }
+
+    console.warn(JSON.stringify(blocks));
 
     return blocks;
 }
