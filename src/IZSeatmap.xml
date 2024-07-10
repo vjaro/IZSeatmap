@@ -24,6 +24,14 @@
                 <caption>On click</caption>
                 <description>Action to be performed when button is clicked</description>
             </property>
+            <property key="blocksJsonData" type="attribute">
+                <caption>Blocks JSON Data</caption>
+                <description></description>
+                <attributeTypes>
+                    <attributeType name="String"/>
+                </attributeTypes>
+            </property>
+    
         </propertyGroup>
     </properties>
 </widget>
