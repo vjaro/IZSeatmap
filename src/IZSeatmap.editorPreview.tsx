@@ -4,7 +4,7 @@ import { IZSeatmapPreviewProps } from "../typings/IZSeatmapProps";
 
 export class preview extends Component<IZSeatmapPreviewProps> {
     render(): ReactNode {
-        return <HelloWorldSample sampleText={this.props.sampleText} />;
+        return <HelloWorldSample />;
     }
 }
 
