@@ -22,8 +22,23 @@ export class IZSeatmap extends PureComponent<IZSeatmapContainerProps> {
     seatClick(seat:any){
         console.warn(seat);
         seat.item.selectedToggle();
-        this.triggerComponentRender = false
-        this.props.buttonAction?.execute();
+        this.triggerComponentRender = false;
+        let seatmaptemplateId = this.props.seat_map_template_id;
+        let seatItem = null;
+        if(this.props.data && this.props.data.items){
+            this.props.data.items.map((item:any) => {
+                const helper = seatmaptemplateId?.get(item).displayValue;
+                if(helper == seat.item.id){
+                    seatItem = item;
+                    return;
+                }
+            });
+        }
+
+        if(seatItem){
+            let seatClickAction = this.props.seatClickAction?.get(seatItem);
+            seatClickAction?.execute();
+        }
     }
 
     shouldComponentUpdate(): boolean {
@@ -36,6 +51,7 @@ export class IZSeatmap extends PureComponent<IZSeatmapContainerProps> {
         if(this.props.blocksJsonData.value){
             this.blocks = JSON.parse(this.props.blocksJsonData.value);
         }
+
 
         return (
             <Fragment>
