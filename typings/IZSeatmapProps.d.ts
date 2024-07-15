@@ -4,19 +4,16 @@
  * @author Mendix Widgets Framework Team
  */
 import { CSSProperties } from "react";
-import { ActionValue, EditableValue, ListValue, ListActionValue, ListAttributeValue } from "mendix";
+import { EditableValue, ListValue, ListActionValue, ListAttributeValue } from "mendix";
 
 export interface IZSeatmapContainerProps {
     name: string;
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
-    sampleText: string;
     data?: ListValue;
-    cartItems?: ListValue;
-    buttonAction?: ActionValue;
-    seatClickAction?: ListActionValue;
     blocksJsonData: EditableValue<string>;
+    seatClickAction?: ListActionValue;
     seat_map_template_id?: ListAttributeValue<string>;
 }
 
@@ -29,11 +26,8 @@ export interface IZSeatmapPreviewProps {
     style: string;
     styleObject?: CSSProperties;
     readOnly: boolean;
-    sampleText: string;
     data: {} | { caption: string } | { type: string } | null;
-    cartItems: {} | { caption: string } | { type: string } | null;
-    buttonAction: {} | null;
-    seatClickAction: {} | null;
     blocksJsonData: string;
+    seatClickAction: {} | null;
     seat_map_template_id: string;
 }

@@ -7,25 +7,9 @@
     <description>Widget for https://github.com/alisaitteke/seatmap-canvas</description>
     <icon/>
     <properties>
-        <propertyGroup caption="General">
-            <property key="sampleText" type="string" required="false">
-                <caption>Default value</caption>
-                <description>Sample text input</description>
-            </property>
+        <propertyGroup caption="Config">
             <property key="data" type="datasource" isList="true" required="false">
-                <caption>Data source</caption>
-                <description />
-            </property>
-            <property key="cartItems" type="datasource" isList="true" required="false">
-                <caption>Cart items</caption>
-                <description />
-            </property>
-            <property key="buttonAction" type="action">
-                <caption>On click</caption>
-                <description>Action to be performed when button is clicked</description>
-            </property>
-            <property key="seatClickAction" type="action" dataSource="data">
-                <caption>Seat Click</caption>
+                <caption>Selectable Seats</caption>
                 <description />
             </property>
             <property key="blocksJsonData" type="attribute">
@@ -34,6 +18,10 @@
                 <attributeTypes>
                     <attributeType name="String"/>
                 </attributeTypes>
+            </property>
+            <property key="seatClickAction" type="action" dataSource="data">
+                <caption>Seat Click</caption>
+                <description />
             </property>
     
         </propertyGroup>
